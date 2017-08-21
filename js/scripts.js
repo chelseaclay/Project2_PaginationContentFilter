@@ -1,5 +1,4 @@
 const $allStudents = $("li.student-item");
-const $matchedStudents = $("li.searchMatch");
 const $page = $(".page");
 const $studentSearchDiv = $("<div class='student-search'></div>");
 const $searchInput = $("<input placeholder='Search for students...''>");
@@ -17,8 +16,7 @@ function showPage(pageClicked, studentList) {
   // first hide all students on the page
   $("li.student-item").hide();
   // Use the slice method to display the correct users
-     $(studentList).slice((pageClicked * 10) - 10, pageClicked * 10).show();
-     $("li.searchMatch").slice((pageClicked * 10) - 10, pageClicked * 10).show();
+  studentList.slice((pageClicked * 10) - 10, pageClicked * 10).show();
  }
 
  function appendPageLinks(totalStudents, studentList) {
@@ -90,12 +88,12 @@ function searchList() {
   // If over ten students were found…
   if (matched.length > 10) {
     // ...call appendPageLinks with the matched students
-    appendPageLinks(matched.length, $matchedStudents);
+    appendPageLinks(matched.length, $("li.searchMatch"));
     $(".pagination a").first().addClass("active");
   }
 
   // Call showPage to show first ten students of matched list
-  showPage(1, $matchedStudents);
+  showPage(1, $("li.searchMatch"));
 }
 
 // Trigger the first page to load when document is ready
